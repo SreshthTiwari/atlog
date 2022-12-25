@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/logo.png" />
+    <link rel="stylesheet" href="../styling/login.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="center">
+      <div class="euroschoologo">
+        <img src="./images/logo.png" alt="" />
+      </div>
+      <h1>Enter Details</h1>
+      <form id="loginform">
+        <div class="txt_field">
+          <input type="email" name="email" id="email" required />
+          <span></span>
+          <label>Username</label>
+        </div>
+        <div class="txt_field">
+          <input type="password" name="password" id="password" required />
+          <span></span>
+          <label>Password</label>
+        </div>
+        <input type="submit" value="Login" id="submitbutton" />
+      </form>
+    </div>
+    <!-- <script type="module" src="../javascript/script.js"></script> -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+      import {
+        getDatabase,
+        set,
+      } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-database.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
+
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAKQ7x0iXdc9zPASPl8fe0Zy3w977sslwQ",
+        authDomain: "schooltransportthingtest.firebaseapp.com",
+        databaseURL:
+          "https://schooltransportthingtest-default-rtdb.firebaseio.com",
+        projectId: "schooltransportthingtest",
+        storageBucket: "schooltransportthingtest.appspot.com",
+        messagingSenderId: "1022909830472",
+        appId: "1:1022909830472:web:14e6c0005a15bcfbed4f7d",
+        measurementId: "G-9477HH598G",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+      const auth = getAuth();
+
+      const loginbutton = document.getElementById("submitbutton");
+      loginbutton.addEventListener("click", (e) => {
+        e.preventDefault();
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            sessionStorage.setItem("userid", user.uid);
+            window.location.href = "./pages/home.html";
+            // alert("Logged in successfully");
+          })
+          .catch((error) => {
+            const errorcode = error.code;
+            const errormessage = error.message;
+
+            alert(errormessage);
+          });
+      });
+    </script>
+  </body>
+</html>
