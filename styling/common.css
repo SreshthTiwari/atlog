@@ -17,6 +17,7 @@
     --toggle-color: #FFDF3E;
     /* --text-color: #707070; */
     --text-color: white;
+    --table-text: #FFDF3E;
 
 
     /* ====== Transition ====== */
@@ -27,7 +28,17 @@
 }
 
 ::-webkit-scrollbar{
-    width: 0;
+    width: 10px;
+}
+
+::-webkit-scrollbar-track{
+    background: var(--primary-color);
+}
+
+::-webkit-scrollbar-thumb{
+    background: var(--sidebar-color);
+    border-radius: 8px;
+    padding: 2px;
 }
 
 body{
@@ -48,6 +59,7 @@ body.dark{
     --primary-color-light: #3a3b3c;
     --toggle-color: #fff;
     --text-color: #fff;
+    --table-text: #fff;
 }
 
 /* ===== Sidebar ===== */
@@ -56,13 +68,14 @@ body.dark{
     top: 0;
     left: 0;
     height: 100%;
-    width: 250px;
+    width: 17vw;
     padding: 10px 14px;
     background: var(--sidebar-color);
     transition: var(--tran-05);
     z-index: 100;  
     box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
 }
+
 .sidebar li{
     height: 50px;
     list-style: none;
@@ -94,11 +107,12 @@ body.dark{
 }
 
 .sidebar .text{
-    font-size: 17px;
+    font-size: 1.2vw;
     font-weight: 500;
     white-space: nowrap;
     opacity: 1;
 }
+
 /* =========================== */
 
 .sidebar header{
@@ -116,7 +130,7 @@ body.dark{
 header .image-text .name {
     margin-top: 20px;
     margin-left: 10px;
-    font-size: 22px;
+    font-size: 1.5vw;
     font-weight: 600;
 }
 
@@ -150,6 +164,7 @@ header .image-text .name {
     transition: var(--tran-05);
     box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.095);
 }
+
 
 body.dark .sidebar header .toggle{
     color: var(--text-color);
@@ -283,48 +298,61 @@ body.dark .switch::before{
     position: absolute;
     top: 0;
     top: 0;
-    left: 250px;
+    left: 17vw;
     height: 100vh;
-    width: calc(100% - 250px);
+    width: calc(100% - 17vw);
     background-color: var(--body-color);
     transition: var(--tran-05);
-}
-.home .text{
-    font-size: 30px;
-    font-weight: 500;
-    color: var(--text-color);
-    padding: 12px 60px;
 }
 
 body.dark .home .text{
     color: var(--text-color);
 }
 
+@media screen and (max-width: 988px){
+    .sidebar{
+        width: 80px;
+    }
+
+    .sidebar header .image-text .name{
+        display: none;
+    }
+
+    .home{
+        left: 80px;
+        height: 100vh;
+        width: calc(100% - 80px); 
+    }
+}
+
 .home .main{
     width: 85%;
     height: 82vh;
-    position: absolute;
-    top: 65px;
-    left: 0px;
     border-radius: 8px;
     background-color: var(--sidebar-color);
     box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
-    margin-left: 100px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 .home .main .text{
-    font-size: 40px;
+    font-size: 2.6vw;
     width: 100%;
     text-align: center;
     font-weight: 700;
     color: var(--text-color);
-    padding: 10px;
+    padding: 1%;
 }
+
 
 .home .main .route{
     margin: 0;
-    font-size: 25px;
-    color: var(--primary-color);
+    font-size: 2.1vw;
+    color: var(--text-color);
     font-weight: 500;
     width: 100%;
     text-align: center;
@@ -334,7 +362,7 @@ body.dark .home .text{
     background: transparent;
     color: white;
     border: none;
-    font-size: 25px;
+    font-size: 2.2vw;
     font-weight: 500;
 }
 
@@ -351,26 +379,206 @@ body.dark .home .text{
     border: none;
 }
 
+.home .main .route .addbutton{
+    padding: 9px 20px;
+    /* color: var(--table-text); */
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    /* background: var(--primary-color); */
+    color: var(--primary-color);
+    background-color: var(--table-text);
+    transition: .3s ease;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.home .main .route .addbutton:hover{
+    background-color: var(--primary-color);
+    color: var(--table-text);
+    transition: .3s ease;
+}
+
+.home .addmenu{
+    width: 45%;
+    height: 23vw;
+    z-index: 100;
+    display: none;
+    position: absolute;
+    color: white;
+    top: 25vh;
+    left: 25%;
+    box-shadow: 0px 0px 500px rgba(13, 13, 0, 0.200);
+    background: var(--sidebar-color);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.addmenu h3{
+    font-size: 2.3vw;
+    padding: 10px;
+}
+
+.addmenu label{
+    font-size: 1.5vw;
+    font-weight: 200;
+}
+
+.addmenu input{
+    border: none;
+    border-radius: 8px;
+    color: var(--sidebar-color);
+    font-size: 1.2vw;
+    padding: .6vw 1.2vw; 
+    margin: 10px;
+}
+
+.addmenu input:focus, .addmenu input:active{
+    outline: none;
+}
+
+.addmenubutton{
+    padding: 9px 20px;
+    background-color: var(--table-text);
+    border: 1px solid var(--primary-color-light);
+    border-radius: 10px;
+    color: var(--primary-color);
+    transition: .3s ease;
+    font-size: 20px;
+    margin: 5px;
+}
+
+.addmenubutton:hover{
+    background-color: var(--primary-color);
+    color: var(--table-text);
+    transition: .3s ease;
+}
+
 .home .main .info{
     width: 90%;
     height: 70%;
     background: var(--primary-color);
     border-radius: 10px;
-    margin: 30px 55px 0px 55px;
     overflow: scroll;
+    margin: 15px auto 0 auto;
 }
 
 .home .main .info table{
     width: 100%;
-    color: var(--sidebar-color);
-    font-size: 20px;
+    color: var(--table-text);
+    font-size: 1.4vw;
     text-align: center;
-    padding: 10px;
+    padding: .7vw;
 }
 
 .home .main .info th{
-    font-size: 23px;
+    font-size: 1.6vw;
     position: sticky;
     top: 0;
-    background: white;
+    background: var(--primary-color);
 }
+
+.home .main .info .editbutton{
+    padding: 1px 20px;
+    color: var(--table-text);
+    border: 1px solid var(--table-text);
+    border-radius: 10px;
+    background: var(--primary-color);
+    transition: .3s ease;
+    font-size: 20px;
+    margin: 5px;
+}
+
+.home .main .info .editbutton:hover{
+    color: var(--primary-color);
+    background: var(--table-text);
+    transition: .3s ease;
+}
+
+
+@media screen and (max-width: 1008px) {
+    .home .main .text{
+        padding-top: 50px;
+        font-size: 25px;
+    }
+
+    .home .main .route, .home .main .route select{
+        padding: 5px;
+        font-size: 20px;
+    }
+
+    .home .main .info table{
+        font-size: 10px;
+        padding-top: 20px;
+    }
+
+    .home .main .info table th{
+        font-size: 13px;
+    }
+
+    .home .main .info .editbutton{
+        font-size: 13px;
+    }
+}
+
+/* .editform{
+    display: none;
+} */
+
+.editform{
+    width: 31%;
+    height: 16vw;
+    z-index: 100;
+    visibility: hidden;
+    position: absolute;
+    color: white;
+    top: 33vh;
+    left: 35%;
+    box-shadow: 0px 0px 500px rgba(13, 13, 0, 0.200);
+    background: var(--sidebar-color);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.editform h3{
+    font-size: 2.6vw;
+    padding: 1vw;
+    width: 100%;
+    text-align: center;
+}
+
+.editform input{
+    border: none;
+    border-radius: 8px;
+    color: var(--sidebar-color);
+    font-size: 1.2vw;
+    padding: .6vw 1.2vw;
+}
+
+.editform input:focus, .editform input:active, .editform input::selection, .editform input:valid{
+    outline: none;
+}
+
+.editform .buttonss{
+    width: 100%;
+    padding-top: 1.5vw;
+}
+
+.editform button{
+    background-color: transparent;
+    padding: 9px 1.2vw;
+    font-size: 1.2vw;
+    border: none;
+    color: var(--text-color);
+    border-radius: 12px;
+    border: 1px solid var(--text-color);
+    /* margin-top: 10px; */
+    transition: .3s ease;
+}
+
+.editform button:hover{
+    background: var(--primary-color);
+    transition: .3s ease;
+    color: var(--table-text);
+}
+

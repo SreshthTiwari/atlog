@@ -81,7 +81,15 @@
             const errorcode = error.code;
             const errormessage = error.message;
 
-            alert(errormessage);
+            if (errorcode == "auth/wrong-password") {
+              alert("You've entered the wrong password");
+            } else if (errorcode == "auth/invalid-email") {
+              alert("The entered email is invalid");
+            } else if (errorcode == "auth/user-not-found") {
+              alert("The entered email is not registered");
+            } else {
+              alert(errormessage);
+            }
           });
       });
     </script>
