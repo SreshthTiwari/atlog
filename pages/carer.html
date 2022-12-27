@@ -101,14 +101,14 @@
         </div>
         <div class="text">Manage Carers</div>
         <div class="route">
-          Access Code:
+          <!-- Access Code: -->
           <!-- <input type="text" class="code" id="auntycode" value="12345" />
           <button onclick="changecode()">Enter</button> -->
-          <select name="code" id="auntycode"></select>
+          <!-- <select name="code" id="auntycode"></select> -->
           <button class="addrecord" onclick="addrecordddd()">Add Record</button>
         </div>
         <div class="info">
-          <div class="containerr">
+          <!-- <div class="containerr">
             <div class="carername" id="carername">Carer Name:</div>
             <br />
             <div class="code" id="route">Carer Route:</div>
@@ -119,7 +119,17 @@
               </button>
               <button onclick="deleterecordofaunty()">Delete Record</button>
             </div>
-          </div>
+          </div> -->
+          <table id="carerinfo">
+            <tr>
+              <th>RouteNo</th>
+              <th>Name</th>
+              <th>Code</th>
+              <th>Access</th>
+              <th>Control</th>
+            </tr>
+            <tbody id="tbody1"></tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -168,8 +178,8 @@
         }
       });
 
-      var auntycode = document.getElementById("auntycode").value;
-      // var auntycode = 12345;
+      // var auntycode = document.getElementById("auntycode").value;
+      var auntycode = 12345;
 
       window.deleterecordofaunty = function deleterecordofaunty() {
         if (confirm("Are you sure?") == true) {
@@ -179,56 +189,131 @@
       };
 
       let selectmenu = document.getElementById("auntycode");
-      function addoptions(carers) {
-        carers.forEach((carer) => {
-          var newopt = document.createElement("option");
-          newopt.value = carer["code"];
-          newopt.innerHTML = carer["code"];
-          selectmenu.appendChild(newopt);
+
+      var tbody = document.getElementById("tbody1");
+
+      function addtotable(RouteNo, Name, codee, access) {
+        let trow = document.createElement("tr");
+        let tdd = document.createElement("td");
+        let td1 = document.createElement("td");
+        let td3 = document.createElement("td");
+        let td4 = document.createElement("td");
+
+        // tdd.setAttribute("class", "codeofaunty")
+        tdd.innerHTML = RouteNo;
+        td1.innerHTML = Name;
+        td3.innerHTML = codee;
+        td4.innerHTML = access;
+
+        trow.appendChild(tdd);
+        trow.appendChild(td1);
+        trow.appendChild(td3);
+        trow.appendChild(td4);
+
+        var controldiv = document.createElement("div");
+
+        if (access == true) {
+          controldiv.innerHTML =
+            '<button id="access" class="editbutton" type="button" onclick="changeaccess(this)">Revoke</button>';
+        } else {
+          controldiv.innerHTML =
+            '<button id="access" class="editbutton" type="button" onclick="changeaccess(this)">Enable</button>';
+        }
+
+        controldiv.innerHTML +=
+          '<button class="editbutton" type="button" onclick="deleterecordofaunty()">Delete</button>';
+        trow.appendChild(controldiv);
+        tbody.appendChild(trow);
+      }
+
+      function addalltotable(student) {
+        tbody.innerHTML = "";
+        student.forEach((element) => {
+          addtotable(
+            element.code,
+            element.name,
+            element.routeNumber,
+            element.access
+          );
+        });
+        // console.log(student[0]);
+      }
+
+      // route.onchange = getdata;
+
+      function getdata() {
+        const dbref = ref(db);
+
+        get(child(dbref, "Carers/")).then((snapshot) => {
+          var students = [];
+          snapshot.forEach((childsnap) => {
+            students.push(childsnap.val());
+          });
+          console.log(students);
+          addalltotable(students);
+        });
+        onValue(dbref, (snapshot) => {
+          var students = [];
+          snapshot.forEach((childsnap) => {
+            students.push(childsnap.val());
+          });
+          console.log(students[3][1]);
+          // students = students.filter((character) => character !== {});
+          // var myrouteno = route.options[route.selectedIndex].text;
+          // addalltotable(students[3][parseInt(myrouteno)]);
         });
       }
 
-      function firstaddtotable(carer) {
-        let carernamehtml = document.getElementById("carername");
-        let carerroutehtml = document.getElementById("route");
-        let accessbutton = document.getElementById("access");
+      window.onload = getdata;
 
-        carerroutehtml.innerHTML = "Carer Route: " + carer["routeNo"];
-        carernamehtml.innerHTML = "Carer Name: " + carer["name"];
+      // function addoptions(carers) {
+      //   carers.forEach((carer) => {
+      //     var newopt = document.createElement("option");
+      //     newopt.value = carer["code"];
+      //     newopt.innerHTML = carer["code"];
+      //     selectmenu.appendChild(newopt);
+      //   });
+      // }
 
-        console.log(carer);
-        if (carer["access"] == true) {
-          accessbutton.innerHTML = "Revoke Access";
-        } else {
-          accessbutton.innerHTML = "Enable Access";
-        }
-      }
+      // function firstaddtotable(carer) {
+      //   let carernamehtml = document.getElementById("carername");
+      //   let carerroutehtml = document.getElementById("route");
+      //   let accessbutton = document.getElementById("access");
 
-      var accessenabled = true;
+      //   carerroutehtml.innerHTML = "Carer Route: " + carer["routeNumber"];
+      //   carernamehtml.innerHTML = "Carer Name: " + carer["name"];
 
-      function addtotable(carer) {
-        let carernamehtml = document.getElementById("carername");
-        let carerroutehtml = document.getElementById("route");
-        let accessbutton = document.getElementById("access");
-        console.log("works ehre");
-        carerroutehtml.innerHTML = "Carer Route: " + carer[3];
-        carernamehtml.innerHTML = "Carer Name: " + carer[2];
-        console.log(carer);
-        if (carer[0] == true) {
-          accessbutton.innerHTML = "Revoke Access";
-          console.log("this is working");
-        } else {
-          accessbutton.innerHTML = "Enable Access";
-        }
-      }
+      //   console.log(carer);
+      //   if (carer["access"] == true) {
+      //     accessbutton.innerHTML = "Revoke Access";
+      //   } else {
+      //     accessbutton.innerHTML = "Enable Access";
+      //   }
+      // }
 
-      window.changeaccess = function changeaccess() {
-        let accessbutton = document.getElementById("access");
+      // var accessenabled = true;
 
-        var auntycode = document.getElementById("auntycode").value;
+      // function addtotable(carer) {
+      //   let carernamehtml = document.getElementById("carername");
+      //   let carerroutehtml = document.getElementById("route");
+      //   let accessbutton = document.getElementById("access");
+      //   console.log("works ehre");
+      //   carerroutehtml.innerHTML = "Carer Route: " + carer[3];
+      //   carernamehtml.innerHTML = "Carer Name: " + carer[2];
+      //   console.log(carer);
+      //   if (carer[0] == true) {
+      //     accessbutton.innerHTML = "Revoke Access";
+      //     console.log("this is working");
+      //   } else {
+      //     accessbutton.innerHTML = "Enable Access";
+      //   }
+      // }
+
+      window.changeaccess = function changeaccess(button) {
+        var auntycode = button.parentElement.parentElement.firstChild.innerHTML;
 
         if (confirm("Are you sure?") == true) {
-          if (accessbutton.innerHTML == "Revoke Access") {
+          if (button.innerHTML == "Revoke") {
             update(ref(db, "Carers/".concat(auntycode)), {
               access: false,
             });
@@ -242,50 +327,50 @@
         }
       };
 
-      function getdata() {
-        const dbref = ref(db);
+      // function getdata() {
+      //   const dbref = ref(db);
 
-        auntycode = document.getElementById("auntycode").value;
+      //   auntycode = document.getElementById("auntycode").value;
 
-        get(child(dbref, "Carers/".concat(auntycode))).then((snapshot) => {
-          var othercarers = [];
-          snapshot.forEach((childsnap) => {
-            othercarers.push(childsnap.val());
-          });
-          console.log(othercarers);
-          addtotable(othercarers);
-          // addoptions(othercarers);
-        });
-        onValue(dbref, (snapshot) => {
-          var carers = [];
-          snapshot.forEach((childsnap) => {
-            carers.push(childsnap.val());
-          });
-          console.log("Value changed");
-          console.log(carers);
-        });
-      }
+      //   get(child(dbref, "Carers/".concat(auntycode))).then((snapshot) => {
+      //     var othercarers = [];
+      //     snapshot.forEach((childsnap) => {
+      //       othercarers.push(childsnap.val());
+      //     });
+      //     console.log(othercarers);
+      //     addtotable(othercarers);
+      //     // addoptions(othercarers);
+      //   });
+      //   onValue(dbref, (snapshot) => {
+      //     var carers = [];
+      //     snapshot.forEach((childsnap) => {
+      //       carers.push(childsnap.val());
+      //     });
+      //     console.log("Value changed");
+      //     console.log(carers);
+      //   });
+      // }
 
-      function getoptionmenu() {
-        const dbref = ref(db);
+      // function getoptionmenu() {
+      //   const dbref = ref(db);
 
-        auntycode = document.getElementById("auntycode").value;
+      //   auntycode = document.getElementById("auntycode").value;
 
-        get(child(dbref, "Carers/".concat(auntycode))).then((snapshot) => {
-          var carers = [];
-          snapshot.forEach((childsnap) => {
-            carers.push(childsnap.val());
-          });
-          console.log(carers);
-          addoptions(carers);
-          firstaddtotable(carers[0]);
-        });
-      }
+      //   get(child(dbref, "Carers/".concat(auntycode))).then((snapshot) => {
+      //     var carers = [];
+      //     snapshot.forEach((childsnap) => {
+      //       carers.push(childsnap.val());
+      //     });
+      //     console.log(carers);
+      //     addoptions(carers);
+      //     firstaddtotable(carers[0]);
+      //   });
+      // }
 
-      function start() {
-        // getdata();
-        getoptionmenu();
-      }
+      // function start() {
+      //   // getdata();
+      //   getoptionmenu();
+      // }
 
       var addmenu = document.getElementById("addmenu");
 
@@ -303,7 +388,7 @@
           access: true,
           code: newcode,
           name: newname,
-          routeNo: newroute,
+          routeNumber: newroute,
         });
 
         alert("Successfully added record");
@@ -321,8 +406,8 @@
         getdata();
       };
 
-      selectmenu.onchange = getdata;
-      window.onload = start;
+      // selectmenu.onchange = getdata;
+      // window.onload = start;
 
       logoutlink.addEventListener("click", function () {
         const auth = getAuth();

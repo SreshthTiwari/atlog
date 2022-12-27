@@ -157,6 +157,73 @@ body.dark{
 }
 /* #endregion */
 
+/* #region table */
+.home .main .info table{
+    width: 100%;
+    color: var(--table-text);
+    font-size: 1.2vw;
+    text-align: center;
+    font-weight: 600;
+    padding: .7vw;
+}
+
+.home .main .info th{
+    font-size: 1.4vw;
+    position: sticky;
+    top: 0;
+    background: var(--primary-color);
+}
+
+
+.home .main .info .editbutton{
+    padding: 1px 20px;
+    color: var(--table-text);
+    border: 1px solid var(--table-text);
+    border-radius: 10px;
+    background: var(--primary-color);
+    transition: .3s ease;
+    font-size: 20px;
+    margin: 5px;
+}
+
+.home .main .info .editbutton:hover{
+    color: var(--primary-color);
+    background: var(--table-text);
+    transition: .3s ease;
+}
+
+
+@media screen and (max-width: 1008px) {
+    .home .main .text{
+        padding-top: 5px;
+        font-size: 25px;
+    }
+
+    .home .main .route, .home .main .route select{
+        padding: 5px;
+        font-size: 20px;
+    }
+
+    .home .main .info table{
+        font-size: 10px;
+        padding-top: 20px;
+    }
+
+    .home .main .info table th{
+        font-size: 13px;
+    }
+
+    .home .main .info .editbutton{
+        font-size: 11px;
+    }
+
+    .addbutton{
+        font-size: 15px;
+        margin: 2px;
+    }
+}
+/* #endregion */
+
 /* #region addmenu */
 .home .addmenu{
     width: 45%;
