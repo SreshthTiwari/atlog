@@ -1,0 +1,361 @@
+/* #region variables */
+:root{
+    /* ===== Colors ===== */
+    --body-color: white;
+    --sidebar-color: #FFDF3E;
+    /* --primary-color: #695CFE; */
+    --primary-color: white;
+    --primary-color-light: #F6F5FF;
+    /* --toggle-color: #DDD; */
+    --toggle-color: #FFDF3E;
+    /* --text-color: #707070; */
+    --text-color: white;
+    --table-text: #FFDF3E;
+
+
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+body.dark{
+    --body-color: #18191a;
+    --sidebar-color: #242526;
+    --primary-color: #3a3b3c;
+    --primary-color-light: #3a3b3c;
+    --toggle-color: #fff;
+    --text-color: #fff;
+    --table-text: #fff;
+}
+/* #endregion */
+
+/* #region home outer */
+.home .main{
+    width: 85%;
+    height: 89vh;
+    border-radius: 8px;
+    background-color: var(--sidebar-color);
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.home .main .text{
+    font-size: 2vw;
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    color: var(--text-color);
+    padding: 1%;
+}
+
+
+.home .main .route{
+    margin: 0;
+    font-size: 1.6vw;
+    color: var(--text-color);
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+}
+
+.home .main .route select{
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 1.6vw;
+    font-weight: 500;
+}
+
+.home .main .route select:active{
+    border: none;
+}
+
+.home .main .route select:focus{
+    border: none;
+}
+
+.home .main .route option{
+    background: var(--sidebar-color);
+    border: none;
+}
+
+.home .main .route .addbutton{
+    padding: 9px 20px;
+    /* color: var(--table-text); */
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    /* background: var(--primary-color); */
+    color: var(--primary-color);
+    background-color: var(--table-text);
+    transition: .3s ease;
+    font-size: 1.3vw;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.home .main .route .addbutton:hover{
+    background-color: var(--primary-color);
+    color: var(--table-text);
+    transition: .3s ease;
+}
+/* #endregion */
+
+/* #region addmenu */
+.home .addmenu{
+    width: 45%;
+    height: 54vh;
+    z-index: 100;
+    display: none;
+    position: absolute;
+    color: white;
+    top: 20vh;
+    left: 25%;
+    box-shadow: 0px 0px 500px rgba(13, 13, 0, 0.200);
+    background: var(--sidebar-color);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.addmenu h3{
+    font-size: 2.3vw;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.addmenu label{
+    font-size: 1.5vw;
+    font-weight: 200;
+}
+
+.addmenu input{
+    border: none;
+    border-radius: 8px;
+    color: var(--sidebar-color);
+    font-size: 1.2vw;
+    padding: .6vw 1.2vw; 
+    margin: 10px;
+}
+
+.addmenu input:focus, .addmenu input:active{
+    outline: none;
+}
+
+.addmenubutton{
+    padding: 9px 20px;
+    background-color: var(--table-text);
+    border: 1px solid var(--primary-color-light);
+    border-radius: 10px;
+    color: var(--primary-color);
+    transition: .3s ease;
+    font-size: 1vw;
+    margin: 5px;
+    margin-top: 10px;
+}
+
+.addmenubutton:hover{
+    background-color: var(--primary-color);
+    color: var(--table-text);
+    transition: .3s ease;
+}
+/* #endregion */
+
+/* #region student table */
+.home .main .info{
+    width: 90%;
+    height: 76%;
+    background: var(--primary-color);
+    border-radius: 10px;
+    overflow: scroll;
+    margin: 15px auto 0 auto;
+}
+
+.home .main .info table{
+    width: 100%;
+    color: var(--table-text);
+    font-size: 1.2vw;
+    text-align: center;
+    font-weight: 600;
+    padding: .7vw;
+}
+
+.home .main .info th{
+    font-size: 1.4vw;
+    position: sticky;
+    top: 0;
+    background: var(--primary-color);
+}
+
+
+.home .main .info .editbutton{
+    padding: 1px 20px;
+    color: var(--table-text);
+    border: 1px solid var(--table-text);
+    border-radius: 10px;
+    background: var(--primary-color);
+    transition: .3s ease;
+    font-size: 20px;
+    margin: 5px;
+}
+
+.home .main .info .editbutton:hover{
+    color: var(--primary-color);
+    background: var(--table-text);
+    transition: .3s ease;
+}
+
+
+@media screen and (max-width: 1008px) {
+    .home .main .text{
+        padding-top: 5px;
+        font-size: 25px;
+    }
+
+    .home .main .route, .home .main .route select{
+        padding: 5px;
+        font-size: 20px;
+    }
+
+    .home .main .info table{
+        font-size: 10px;
+        padding-top: 20px;
+    }
+
+    .home .main .info table th{
+        font-size: 13px;
+    }
+
+    .home .main .info .editbutton{
+        font-size: 11px;
+    }
+
+    .addbutton{
+        font-size: 15px;
+        margin: 2px;
+    }
+}
+/* #endregion */
+
+/* #region editform design */
+.editform{
+    width: 31%;
+    height: 16vw;
+    z-index: 100;
+    visibility: hidden;
+    position: absolute;
+    color: white;
+    top: 33vh;
+    left: 35%;
+    box-shadow: 0px 0px 500px rgba(13, 13, 0, 0.200);
+    background: var(--sidebar-color);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.editform h3{
+    font-size: 2.6vw;
+    padding: 1vw;
+    width: 100%;
+    text-align: center;
+}
+
+.editform input{
+    border: none;
+    border-radius: 8px;
+    color: var(--sidebar-color);
+    font-size: 1.2vw;
+    padding: .6vw 1.2vw;
+}
+
+.editform input:focus, .editform input:active, .editform input::selection, .editform input:valid{
+    outline: none;
+}
+
+.editform .buttonss{
+    width: 100%;
+    padding-top: 1.5vw;
+}
+
+.editform button{
+    background-color: transparent;
+    padding: 9px 1.2vw;
+    font-size: 1.2vw;
+    border: none;
+    color: var(--text-color);
+    border-radius: 12px;
+    border: 1px solid var(--text-color);
+    /* margin-top: 10px; */
+    transition: .3s ease;
+}
+
+.editform button:hover{
+    background: var(--primary-color);
+    transition: .3s ease;
+    color: var(--table-text);
+}
+/* #endregion */
+
+/* #region excelmenu */
+.excelmenu{
+    width: 31%;
+    height: 22vw;
+    z-index: 100;
+    display: none;
+    position: absolute;
+    color: white;
+    top: 31vh;
+    left: 35%;
+    box-shadow: 0px 0px 500px rgba(13, 13, 0, 0.200);
+    background: var(--sidebar-color);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.excelmenu h3{
+    font-size: 2.6vw;
+    padding: 1vw;
+    width: 100%;
+    text-align: center;   
+}
+
+.excelmenu button{
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 9px 20px ;
+    border-radius: 8px;
+    transition: .3s ease;
+    font-size: 1.2vw;
+    margin: 5px;
+}
+
+.excelmenu button:hover{
+    transition: .3s ease;
+    background-color: var(--primary-color);
+    color: var(--table-text);
+    border: 1px solid var(--table-text);
+}
+
+.excelmenu input::-webkit-file-upload-button{
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 9px 20px ;
+    border-radius: 8px;
+    transition: .3s ease;
+    font-size: 1.2vw;
+    margin: 5px;
+}
+
+.excelmenu input::-webkit-file-upload-button:hover{
+    transition: .3s ease;
+    background-color: var(--primary-color);
+    color: var(--table-text);
+    border: 1px solid var(--table-text);
+}
+/* #endregion */

@@ -1,0 +1,220 @@
+/* #region variables */
+:root{
+    /* ===== Colors ===== */
+    --body-color: white;
+    --sidebar-color: #FFDF3E;
+    /* --primary-color: #695CFE; */
+    --primary-color: white;
+    --primary-color-light: #F6F5FF;
+    /* --toggle-color: #DDD; */
+    --toggle-color: #FFDF3E;
+    /* --text-color: #707070; */
+    --text-color: white;
+    --table-text: #FFDF3E;
+
+
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+body.dark{
+    --body-color: #18191a;
+    --sidebar-color: #242526;
+    --primary-color: #3a3b3c;
+    --primary-color-light: #3a3b3c;
+    --toggle-color: #fff;
+    --text-color: #fff;
+    --table-text: #fff;
+}
+/* #endregion */
+
+/* #region  home outer */
+.home .main{
+    width: 85%;
+    height: 80vh;
+    border-radius: 8px;
+    background-color: var(--sidebar-color);
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.home .main .text{
+    padding-top: 20%;
+    font-size: 2.5vw;
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    color: var(--text-color);
+    padding: 1%;
+}
+
+
+.home .main .route{
+    margin: 0;
+    font-size: 2.3vw;
+    color: var(--text-color);
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+}
+
+.home .main .route select{
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 2.3vw;
+    font-weight: 500;
+}
+
+.home .main .route select:active{
+    border: none;
+}
+
+.home .main .route select:focus{
+    border: none;
+}
+
+.home .main .route option{
+    background: var(--sidebar-color);
+    border: none;
+}
+
+.home .main .info{
+    width: 90%;
+    height: 70%;
+    background: var(--primary-color);
+    border-radius: 10px;
+    overflow: scroll;
+    margin: 15px auto 0 auto;
+    color: var(--table-text);
+    font-size: 2.3vw;
+}
+
+.home .main .info .containerr{
+    width: 90%;
+    height: 90%;
+    text-align: center;
+    font-weight: 700;
+    padding-top: 8%;
+    margin: auto;
+}
+.home .main .info button{
+    background-color: transparent;
+    color: var(--table-text);
+    border: 3px solid var(--table-text);
+    transition: .3s ease;
+    border-radius: 8px;
+    padding: 9px 20px;
+    font-weight: 700;
+    font-size: 2vw;
+}
+
+.home .main .info button:hover{
+    background-color: var(--table-text);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    transition: .3s ease;
+}
+
+.home .main .route input{
+    background: none;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    font-size: 2.3vw;
+    width: 9vw;
+    border: none;
+    border-bottom: 1px solid white;
+}
+
+.route input:focus, .route input:active{
+    outline: none;
+}
+
+.home .main .route button{
+    padding: 9px 20px;
+    background-color: var(--table-text);
+    border: 1px solid var(--primary-color-light);
+    border-radius: 10px;
+    color: var(--primary-color);
+    transition: .3s ease;
+    font-size: 1.5vw;
+    margin: 5px;
+    margin-top: 10px;
+}
+
+.home .main .route button:hover{
+    background-color: var(--primary-color);
+    color: var(--table-text);
+    transition: .3s ease;
+}
+/* #endregion */
+
+/* #region addmenu */
+.home .addmenu{
+    width: 45%;
+    height: 46vh;
+    z-index: 100;
+    display: none;
+    position: absolute;
+    color: white;
+    top: 15vh;
+    left: 25%;
+    box-shadow: 0px 0px 500px rgba(13, 13, 0, 0.200);
+    background: var(--sidebar-color);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.addmenu h3{
+    font-size: 2.3vw;
+    padding: 10px;
+    margin-top: 10px;
+    color: var(--primary-color);
+}
+
+.addmenu label{
+    font-size: 1.5vw;
+    font-weight: 200;
+
+}
+
+.addmenu input{
+    border: none;
+    border-radius: 8px;
+    color: var(--sidebar-color);
+    font-size: 1.2vw;
+    padding: .6vw 1.2vw; 
+    margin: 10px;
+}
+
+.addmenu input:focus, .addmenu input:active{
+    outline: none;
+}
+
+.addmenubutton{
+    padding: 9px 20px;
+    background-color: var(--table-text);
+    border: 1px solid var(--primary-color-light);
+    border-radius: 10px;
+    color: var(--primary-color);
+    transition: .3s ease;
+    font-size: 1vw;
+    margin: 5px;
+    margin-top: 10px;
+}
+
+.addmenubutton:hover{
+    background-color: var(--primary-color);
+    color: var(--table-text);
+    transition: .3s ease;
+}
+
+/* #endregion */
