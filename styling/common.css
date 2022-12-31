@@ -32,6 +32,7 @@ body{
     color: #fff;
 }
 body.dark{
+/* :root{ */
     --body-color: #18191a;
     --sidebar-color: #242526;
     --primary-color: #3a3b3c;
@@ -304,5 +305,35 @@ body.dark .home .text{
         height: 100vh;
         width: calc(100% - 80px); 
     }
+}
+/* #endregion */
+
+/* #region loading */
+.loadinggif{
+    width: 100%;
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadinggif .loader{
+    border: 10px solid #242526; /* Light grey */
+    border-top: 10px solid white; /* Blue */
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    animation: spin 1s linear infinite;
+
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 /* #endregion */

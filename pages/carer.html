@@ -83,6 +83,9 @@
       </div>
     </nav>
 
+    <div class="loadinggif" id="lgif">
+      <div class="loader"></div>
+    </div>
     <section class="home">
       <div class="main">
         <div class="addmenu" id="addmenu">
@@ -101,25 +104,9 @@
         </div>
         <div class="text">Manage Carers</div>
         <div class="route">
-          <!-- Access Code: -->
-          <!-- <input type="text" class="code" id="auntycode" value="12345" />
-          <button onclick="changecode()">Enter</button> -->
-          <!-- <select name="code" id="auntycode"></select> -->
           <button class="addrecord" onclick="addrecordddd()">Add Record</button>
         </div>
         <div class="info">
-          <!-- <div class="containerr">
-            <div class="carername" id="carername">Carer Name:</div>
-            <br />
-            <div class="code" id="route">Carer Route:</div>
-            <br />
-            <div class="access">
-              <button onclick="changeaccess()" id="access">
-                Revoke Access
-              </button>
-              <button onclick="deleterecordofaunty()">Delete Record</button>
-            </div>
-          </div> -->
           <table id="carerinfo">
             <tr>
               <th>RouteNo</th>
@@ -178,13 +165,16 @@
         }
       });
 
-      // var auntycode = document.getElementById("auntycode").value;
-      var auntycode = 12345;
-
-      window.deleterecordofaunty = function deleterecordofaunty() {
+      window.deleterecordofaunty = function deleterecordofaunty(button) {
         if (confirm("Are you sure?") == true) {
-          remove(ref(db, "Carers/".concat(auntycode)));
-          location.reload();
+          remove(
+            ref(
+              db,
+              "Carers/".concat(
+                button.parentElement.parentElement.firstChild.innerHTML
+              )
+            )
+          );
         }
       };
 
@@ -199,7 +189,6 @@
         let td3 = document.createElement("td");
         let td4 = document.createElement("td");
 
-        // tdd.setAttribute("class", "codeofaunty")
         tdd.innerHTML = RouteNo;
         td1.innerHTML = Name;
         td3.innerHTML = codee;
@@ -221,9 +210,12 @@
         }
 
         controldiv.innerHTML +=
-          '<button class="editbutton" type="button" onclick="deleterecordofaunty()">Delete</button>';
+          '<button class="editbutton" type="button" onclick="deleterecordofaunty(this)">Delete</button>';
         trow.appendChild(controldiv);
         tbody.appendChild(trow);
+
+        var loading = document.getElementById("lgif");
+        loading.style.display = "none";
       }
 
       function addalltotable(student) {
@@ -236,10 +228,7 @@
             element.access
           );
         });
-        // console.log(student[0]);
       }
-
-      // route.onchange = getdata;
 
       function getdata() {
         const dbref = ref(db);
@@ -257,57 +246,11 @@
           snapshot.forEach((childsnap) => {
             students.push(childsnap.val());
           });
-          console.log(students[3][1]);
-          // students = students.filter((character) => character !== {});
-          // var myrouteno = route.options[route.selectedIndex].text;
-          // addalltotable(students[3][parseInt(myrouteno)]);
+          addalltotable(Object.values(students[2]));
         });
       }
 
       window.onload = getdata;
-
-      // function addoptions(carers) {
-      //   carers.forEach((carer) => {
-      //     var newopt = document.createElement("option");
-      //     newopt.value = carer["code"];
-      //     newopt.innerHTML = carer["code"];
-      //     selectmenu.appendChild(newopt);
-      //   });
-      // }
-
-      // function firstaddtotable(carer) {
-      //   let carernamehtml = document.getElementById("carername");
-      //   let carerroutehtml = document.getElementById("route");
-      //   let accessbutton = document.getElementById("access");
-
-      //   carerroutehtml.innerHTML = "Carer Route: " + carer["routeNumber"];
-      //   carernamehtml.innerHTML = "Carer Name: " + carer["name"];
-
-      //   console.log(carer);
-      //   if (carer["access"] == true) {
-      //     accessbutton.innerHTML = "Revoke Access";
-      //   } else {
-      //     accessbutton.innerHTML = "Enable Access";
-      //   }
-      // }
-
-      // var accessenabled = true;
-
-      // function addtotable(carer) {
-      //   let carernamehtml = document.getElementById("carername");
-      //   let carerroutehtml = document.getElementById("route");
-      //   let accessbutton = document.getElementById("access");
-      //   console.log("works ehre");
-      //   carerroutehtml.innerHTML = "Carer Route: " + carer[3];
-      //   carernamehtml.innerHTML = "Carer Name: " + carer[2];
-      //   console.log(carer);
-      //   if (carer[0] == true) {
-      //     accessbutton.innerHTML = "Revoke Access";
-      //     console.log("this is working");
-      //   } else {
-      //     accessbutton.innerHTML = "Enable Access";
-      //   }
-      // }
 
       window.changeaccess = function changeaccess(button) {
         var auntycode = button.parentElement.parentElement.firstChild.innerHTML;
@@ -317,60 +260,13 @@
             update(ref(db, "Carers/".concat(auntycode)), {
               access: false,
             });
-            location.reload();
           } else {
             update(ref(db, "Carers/".concat(auntycode)), {
               access: true,
             });
-            location.reload();
           }
         }
       };
-
-      // function getdata() {
-      //   const dbref = ref(db);
-
-      //   auntycode = document.getElementById("auntycode").value;
-
-      //   get(child(dbref, "Carers/".concat(auntycode))).then((snapshot) => {
-      //     var othercarers = [];
-      //     snapshot.forEach((childsnap) => {
-      //       othercarers.push(childsnap.val());
-      //     });
-      //     console.log(othercarers);
-      //     addtotable(othercarers);
-      //     // addoptions(othercarers);
-      //   });
-      //   onValue(dbref, (snapshot) => {
-      //     var carers = [];
-      //     snapshot.forEach((childsnap) => {
-      //       carers.push(childsnap.val());
-      //     });
-      //     console.log("Value changed");
-      //     console.log(carers);
-      //   });
-      // }
-
-      // function getoptionmenu() {
-      //   const dbref = ref(db);
-
-      //   auntycode = document.getElementById("auntycode").value;
-
-      //   get(child(dbref, "Carers/".concat(auntycode))).then((snapshot) => {
-      //     var carers = [];
-      //     snapshot.forEach((childsnap) => {
-      //       carers.push(childsnap.val());
-      //     });
-      //     console.log(carers);
-      //     addoptions(carers);
-      //     firstaddtotable(carers[0]);
-      //   });
-      // }
-
-      // function start() {
-      //   // getdata();
-      //   getoptionmenu();
-      // }
 
       var addmenu = document.getElementById("addmenu");
 
@@ -393,7 +289,6 @@
 
         alert("Successfully added record");
         addmenu.style.display = "none";
-        location.reload();
         console.log("done");
       };
 
@@ -405,9 +300,6 @@
         auntycode = document.getElementById("auntycode").value;
         getdata();
       };
-
-      // selectmenu.onchange = getdata;
-      // window.onload = start;
 
       logoutlink.addEventListener("click", function () {
         const auth = getAuth();
@@ -424,17 +316,30 @@
         modeSwitch = body.querySelector(".toggle-switch"),
         modeText = body.querySelector(".mode-text");
 
-      modeSwitch.addEventListener("click", () => {
+      function godark() {
         body.classList.toggle("dark");
 
         if (body.classList.contains("dark")) {
           modeText.innerText = "Light mode";
+          localStorage.setItem("theme", "dark");
+          console.log("its dark");
           img.innerHTML = '<img src="../images/darklogo.png" alt="" />';
         } else {
           modeText.innerText = "Dark mode";
+          localStorage.setItem("theme", "light");
+          console.log("its light");
           img.innerHTML = '<img src="../images/logo.png" alt="" />';
         }
-      });
+      }
+
+      if (localStorage.getItem("theme") === "dark") {
+        console.log("itdark");
+        modeText.innerText = "Light mode";
+        img.innerHTML = '<img src="../images/darklogo.png" alt="" />';
+        body.classList.toggle("dark");
+      }
+
+      modeSwitch.addEventListener("click", godark);
     </script>
   </body>
 </html>
